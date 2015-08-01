@@ -61,22 +61,32 @@ var touchsingle = function(o) {
             this.juliy = this.sy - this.my;
             if (this.sx - this.mx > 0 && Math.abs(this.my - this.sy) < Math.abs(this.sx - this.mx)) {
                 //console.log("从右住左")
+
                 this.fangxiang("youzuo");
                 this.run(this.onyouzuo);
+
             } else if (this.mx - this.sx > 0 && Math.abs(this.my - this.sy) < Math.abs(this.sx - this.mx)) {
                 //console.log("从左住右")
+
                 this.fangxiang("zuoyou");
                 this.run(this.onzuoyou);
+
             } else if (this.sy - this.my > 0 && Math.abs(this.mx - this.sx) < Math.abs(this.sy - this.my)) {
                 //console.log("从下住上")
+
                 this.fangxiang("youzuo");
                 this.run(this.onxiashang);
+
             } else if (this.my - this.sy > 0 && Math.abs(this.mx - this.sx) < Math.abs(this.sy - this.my)) {
                 //console.log("从上住下")
+
                 this.fangxiang("zuoyou");
                 this.run(this.onshangxia);
+
             } else {
+
                 console.log("无法判断方向")
+                
             }
             this.run(this.onmove);
 
@@ -105,6 +115,7 @@ var touchsingle = function(o) {
             this._s = this.ebind(this.s, this);
             this._m = this.ebind(this.m, this);
             this._e = this.ebind(this.e, this);
+
             this.ele.addEventListener("touchstart", this._s, false);
             this.ele.addEventListener("touchmove", this._m, false);
             this.ele.addEventListener("touchend", this._e, false);
@@ -114,10 +125,10 @@ var touchsingle = function(o) {
             this.ele.removeEventListener("touchmove", this._m, false);
             this.ele.removeEventListener("touchend", this._e, false);
         },
-        fangxiang: function(str) {
+        fangxiang: function(direction) {
             this.zuoyou = this.youzuo = this.shangxia = this.xiashang = false;
-            this[str] = true;
-            this.fx = str;
+            this[direction] = true;
+            this.fx = direction;
         },
         getstyle: function(obj, attr) {
             return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj, false)[attr];
@@ -128,7 +139,6 @@ var touchsingle = function(o) {
             }
         },
         animate: function(ele, obj, duration) {
-            console.log(obj);
             var oChange = {};
             var oBegin = {};
             for (var attr in obj) {
