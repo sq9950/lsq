@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=320,minimum-scale=1,user-scalable=no">
+    <title>手势事件</title>
+    <style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        background: red;
+    }
+    
+    ul {
+        list-style: none;
+    }
+    
+    .div {
+        width: 100%;
+        height: 50%;
+        background: #ccc;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .ul {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    
+    .li {
+        float: left;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="div" id="div1">
+        <ul class="ul">
+            <li class="li" style="background:red;"></li>
+            <li class="li" style="background:yellow;"></li>
+            <li class="li" style="background:#ccc;"></li>
+            <li class="li" style="background:blue;"></li>
+            <li class="li" style="background:#000;"></li>
+        </ul>
+    </div>
+    <div class="div" id="div2">
+        <ul class="ul">
+            <li class="li" style="background:#ff8903"></li>
+            <li class="li" style="background:#b5d41e;"></li>
+            <li class="li" style="background:#ae83fe;"></li>
+            <li class="li" style="background:#14142f;"></li>
+            <li class="li" style="background:#4ebd64;"></li>
+        </ul>
+    </div>
+</body>
+
+</html>
+<script type="text/ecmascript" src="touch.js"></script>
+<script type="text/ecmascript">
+var body_w = document.documentElement.clientWidth || document.body.clientWidth;
+var body_h = document.documentElement.clientHeight || document.body.clientHeight;
+var ul1 = document.getElementsByClassName("ul")[0];
+var ul2 = document.getElementsByClassName("ul")[1];
+function init(obj){
+    var li = obj.ele.getElementsByTagName("li");
+    this.li=li
+    for (var i = 0; i < li.length; i++) {
+        li[i].style.width = body_w + "px";
+        li[i].style.height = body_h + "px";
+    }
+    obj.ele.style.width = li.length * body_w + "px";
+    if(typeof obj.oninit == "function"){
+        obj.oninit(obj)
+    }
+}
+function move(obj){
+    obj.ele.style.left = -obj._left - obj.julix + "px";
+}
+function end(obj){
+    //如果手指移动距离大于40进行的动画
+    if (Math.abs(obj.julix) > 100) {
+        if (obj.zuoyou) {
+            if (obj.index > 1) {
+                this.animate(obj.ele,{"left":-(obj._left - body_w)},300);
+                obj.index -= 1;
+            } else {
+                this.animate(obj.ele,{"left":-(obj._left)},300);
+            }
+        } else if (obj.youzuo) {
+            if (obj.index < this.li.length) {
+                this.animate(obj.ele,{"left":-(obj._left + body_w)},300);
+                obj.index += 1
+            } else {
+                this.animate(obj.ele,{"left":-(obj._left)},300);
+            }
+        }
+    } else {
+        //如果手指移动距离小于40则回到你手指按下时的坐标
+        this.animate(obj.ele,{"left":-obj._left},500);
+    }
+}
+touchsingle({
+    "ele":ul1,
+    init:init,
+    onmove:move,
+    onend:end
+});
+touchsingle({
+    "ele":ul2,
+    init:init,
+    onmove:move,
+    onend:end
+})
+</script>
