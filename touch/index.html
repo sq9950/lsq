@@ -87,22 +87,22 @@ function end(obj){
     if (Math.abs(obj.julix) > 100) {
         if (obj.zuoyou) {
             if (obj.index > 1) {
-                obj.animate(obj.ele,{"left":-(obj._left - body_w)},300);
+                obj.animate(obj.ele,{"left":-(obj._left - body_w)},100);
                 obj.index -= 1;
             } else {
-                obj.animate(obj.ele,{"left":-(obj._left)},300);
+                obj.animate(obj.ele,{"left":-(obj._left)},100);
             }
         } else if (obj.youzuo) {
             if (obj.index < obj.li.length) {
-                obj.animate(obj.ele,{"left":-(obj._left + body_w)},300);
+                obj.animate(obj.ele,{"left":-(obj._left + body_w)},100);
                 obj.index += 1
             } else {
-                obj.animate(obj.ele,{"left":-(obj._left)},300);
+                obj.animate(obj.ele,{"left":-(obj._left)},100);
             }
         }
     } else {
         //如果手指移动距离小于40则回到你手指按下时的坐标
-        obj.animate(obj.ele,{"left":-obj._left},500);
+        obj.animate(obj.ele,{"left":-obj._left},100);
     }
 }
 touchsingle({
