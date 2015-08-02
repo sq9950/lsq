@@ -72,15 +72,12 @@ var ul1 = document.getElementsByClassName("ul")[0];
 var ul2 = document.getElementsByClassName("ul")[1];
 function init(obj){
     var li = obj.ele.getElementsByTagName("li");
-    this.li=li
+    obj.li=li
     for (var i = 0; i < li.length; i++) {
         li[i].style.width = body_w + "px";
         li[i].style.height = body_h + "px";
     }
     obj.ele.style.width = li.length * body_w + "px";
-
-    obj.run(obj.oninit);
-    
 }
 function move(obj){
     obj.ele.style.left = -obj._left - obj.julix + "px";
@@ -90,22 +87,22 @@ function end(obj){
     if (Math.abs(obj.julix) > 100) {
         if (obj.zuoyou) {
             if (obj.index > 1) {
-                this.animate(obj.ele,{"left":-(obj._left - body_w)},300);
+                obj.animate(obj.ele,{"left":-(obj._left - body_w)},300);
                 obj.index -= 1;
             } else {
-                this.animate(obj.ele,{"left":-(obj._left)},300);
+                obj.animate(obj.ele,{"left":-(obj._left)},300);
             }
         } else if (obj.youzuo) {
-            if (obj.index < this.li.length) {
-                this.animate(obj.ele,{"left":-(obj._left + body_w)},300);
+            if (obj.index < obj.li.length) {
+                obj.animate(obj.ele,{"left":-(obj._left + body_w)},300);
                 obj.index += 1
             } else {
-                this.animate(obj.ele,{"left":-(obj._left)},300);
+                obj.animate(obj.ele,{"left":-(obj._left)},300);
             }
         }
     } else {
         //如果手指移动距离小于40则回到你手指按下时的坐标
-        this.animate(obj.ele,{"left":-obj._left},500);
+        obj.animate(obj.ele,{"left":-obj._left},500);
     }
 }
 touchsingle({
