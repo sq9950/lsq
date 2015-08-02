@@ -78,9 +78,9 @@ function init(obj){
         li[i].style.height = body_h + "px";
     }
     obj.ele.style.width = li.length * body_w + "px";
-    if(typeof obj.oninit == "function"){
-        obj.oninit(obj)
-    }
+
+    obj.run(obj.oninit);
+    
 }
 function move(obj){
     obj.ele.style.left = -obj._left - obj.julix + "px";
