@@ -79,6 +79,9 @@ function init(obj){
     }
     obj.ele.style.width = li.length * body_w + "px";
 }
+function start(obj){
+    obj._left = parseInt(obj.getstyle(obj.ele, "left").replace("-", ""), 10);
+}
 function move(obj){
     obj.ele.style.left = -obj._left - obj.julix + "px";
 }
@@ -108,12 +111,14 @@ function end(obj){
 touchsingle({
     "ele":ul1,
     init:init,
+    onstart:start,
     onmove:move,
     onend:end
 });
 touchsingle({
     "ele":ul2,
     init:init,
+    onstart:start,
     onmove:move,
     onend:end
 })

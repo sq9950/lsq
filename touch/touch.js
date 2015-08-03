@@ -45,8 +45,6 @@ var touchsingle = function(o) {
             this.isdrag = true;
             this.sx = t.pageX;
             this.sy = t.pageY;
-            this._left = parseInt(this.getstyle(this.ele, "left").replace("-", ""), 10);
-
             this.run(this.onstart);
         },
         m: function(e) {
@@ -112,6 +110,7 @@ var touchsingle = function(o) {
             if (typeof fn == "function")fn(obj);
         },
         addEv: function() {
+            //如果不绑定，这里的this会指向window
             this._s = this.ebind(this.s, this);
             this._m = this.ebind(this.m, this);
             this._e = this.ebind(this.e, this);
