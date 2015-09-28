@@ -1,6 +1,5 @@
 var touchsingle = function(o) {
-    var _touch = function(o) {
-	
+    var _touch = function(o) {	
         this.index = 1;//当前li的索引
         this.isdrag = null;//手指start开关
         this.isend = true;//手指抬起开关
